@@ -8,16 +8,22 @@ const taskSchema = new mongoose.Schema({
   },
   description: String,
   creator: String,
+  // expire_at: { type: Date, default: Date.now(), expires: 0 },
   createdAt: {
     type: Date,
     default: Date.now(),
-    required: [true, "A task must have a createdAt"],
   },
-  Duration: {
+  duration: {
     type: Number,
-    required: [true, "A task must have a Duration"],
+    default: 90,
   },
 });
+
+// taskSchema.index(
+//   { createdAt: 1 },
+//   { expireAfterSeconds: taskSchema.obj.duration }
+//   // { expireAfterSeconds: 180 }
+// );
 
 const Task = mongoose.model("Task", taskSchema);
 module.exports = Task;
